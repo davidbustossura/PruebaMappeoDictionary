@@ -1,0 +1,23 @@
+﻿@using PruebaMappeoDictionary.Controllers;
+@model PruebaMappingDictionaryViewModel;
+
+<p>Hola</p>
+
+
+@using (Html.BeginForm(FormMethod.Post))
+{
+    foreach (KeyValuePair<string, SubClassMappingDictionary> item in Model.SubClassMappingDictionary)
+    {
+        string currentKey = item.Key;
+        @Html.EditorFor(m => Model.SubClassMappingDictionary[currentKey].StringProp)
+        <p>Loop</p>
+        <br />
+        foreach(KeyValuePair<string, SubSubClassMappingDictionary> subitem in Model.SubClassMappingDictionary[currentKey].SubSubClassMappingDictionary)
+        {
+            string subitemCurrentKey = subitem.Key;
+            @Html.EditorFor(m => Model.SubClassMappingDictionary[currentKey].SubSubClassMappingDictionary[subitemCurrentKey].StrField)
+        }
+    }
+    <br />
+    <button type="submit" class="btn btn-primary">Enviar</button>
+}
